@@ -51,6 +51,7 @@ La arquitectura de software sirve para proporcionar una estructura clara y organ
 ---
 
 ## Capas vs Componentes
+
 - Capas
     Las capas son niveles de abstracción que agrupan funcionalidades similares. Cada capa tiene una responsabilidad específica y se comunica con las capas adyacentes.
     Ejemplo: Capa de presentación, capa de lógica de negocio, capa de datos.
@@ -68,3 +69,65 @@ Ejemplo:
 - Capa de Dominio
     - Componente de Lógica de Negocio
     - Componente de Servicios de Dominio
+
+---
+
+## Arquitecturas Limpias
+
+Objetivo claro: Separar el código que cambia con frecuencia del código que es estable y central para el negocio.
+Y este es de afuera hacia adentro. Los elementos de afuera conocan a los elementos de adentro, pero no al revés.
+
+### Dominio
+
+El dominio nunca se entera de herramientas exteriores.
+
+- Entidades
+    Representan los objetos del negocio con sus atributos y comportamientos.
+- Servicios de Dominio
+    Contienen la lógica de negocio que no pertenece a una entidad específica.
+- Repositorios
+    Interfaces para acceder a los datos del dominio.
+
+### Aplicación
+
+La capa de aplicación orquesta las operaciones del sistema, coordinando entre el dominio y las capas externas.
+Orquesta funcionalidades sin contener lógica de negocio.
+
+- Servicios de Aplicación
+    Implementan los casos de uso, gestionando la lógica de flujo y las transacciones.
+- Casos de Uso
+    Definen las operaciones específicas que el sistema puede realizar.
+- DTOs (Data Transfer Objects)
+    Objetos simples para transferir datos entre capas.
+
+### Infraestructura
+
+La infraestructura proporciona implementaciones concretas para las interfaces definidas en las capas superiores. Facilita la interacción con sistemas externos y recursos técnicos.
+
+Es la capa más cercana a los detalles técnicos y que interactua mas.
+
+- Repositorios Concretos
+    Implementaciones de los repositorios definidos en el dominio.
+- Servicios Externos
+    Integraciones con servicios externos como APIs, sistemas de mensajería, etc.
+- Configuración
+    Manejo de configuraciones y parámetros del sistema.
+
+```Lecturas como la Arquitectura Limpia de Robert C. Martin (Uncle Bob) y patrones de diseño relacionados pueden proporcionar una comprensión más profunda de estos conceptos.
+
+Este mismo sugiere una estructura como:
+- Entidades (Enterprise Business Rules)
+- Casos de Uso (Application Business Rules)
+- Controllers/Gateways/Presenters (Interface Adapters)
+- External Interfaces/DB/Devices/Web/UI (Frameworks and Drivers)
+
+Se sugiere una capa intermedia entre Infraestructura y Aplicación llamada "Interface Adapters".
+El cual es practicamente un transformador de entidades.
+
+- Controladores
+    Manejan la interacción con el usuario o sistemas externos.
+- Presentadores
+    Formatean los datos para la presentación.
+- Gateways
+    Adaptan las interfaces de los sistemas externos a las necesidades del dominio y la aplicación.
+```
