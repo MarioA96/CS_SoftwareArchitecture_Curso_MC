@@ -131,3 +131,60 @@ El cual es practicamente un transformador de entidades.
 - Gateways
     Adaptan las interfaces de los sistemas externos a las necesidades del dominio y la aplicación.
 ```
+
+## Instalaciones
+
+- Mediante NuGet
+Data
+Instalando:
+```bash
+$> Microsoft.EntityFrameworkCore.Design
+$> Microsoft.EntityFrameworkCore.SQL
+$> Microsoft.EntityFrameworkCore.Tools
+```
+
+- Alojamiento fisico de dependencias/paquetes NuGet
+```bash
+C:\Users\mario\.nuget\packages
+```
+
+- Scaffolding
+
+Generacion automatica de todas las clases que representan a la base de datos
+
+- Servicios para el uso de SQL Server Management
+
+```bash
+SQL Server (MSQLSERVER)
+SQL Server (SQLEXPRESS)
+SQL Server Agent (MSSQLSERVER)
+SQL Server Browser
+SQL Server CEIP service (MSSQLSERVER)
+SQL Server VSS Writer
+```
+
+- Instalacion global de EF (cierta version compatible con tu version de dotnet)
+
+```bash
+$> dotnet tool install --global dotnet-ef --version 10.0.0
+```
+
+- Remover de forma global EF
+
+```bash
+dotnet tool uninstall dotnet-ef --global
+```
+
+- Comando de Scaffolding
+
+```bash
+ls
+cd Data
+-> Compila en VS a Data (la cajita C# Data)
+
+Cadena de conexion:
+Server=localhost\SQLEXPRESS;Database=Store;Trusted_Connection=True;TrustServerCertificate=True
+
+Comando:
+dotnet ef dbcontext scaffold "Server=localhost\SQLEXPRESS;Database=Store;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer
+```
