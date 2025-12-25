@@ -77,6 +77,18 @@ Ejemplo:
 Objetivo claro: Separar el código que cambia con frecuencia del código que es estable y central para el negocio.
 Y este es de afuera hacia adentro. Los elementos de afuera conocan a los elementos de adentro, pero no al revés.
 
+### Temas Puntuales
+
+- Componentes de Datos
+
+- Creacion de Componente de Data e Instalacion de EntityFramework
+
+- Scaffolding
+
+- Componente Repository
+
+- Obtencion/Agregacion/Edicion/Eliminacion de Elementos Mediante EntityFramework
+
 ### Dominio
 
 El dominio nunca se entera de herramientas exteriores.
@@ -188,3 +200,21 @@ Server=localhost\SQLEXPRESS;Database=Store;Trusted_Connection=True;TrustServerCe
 Comando:
 dotnet ef dbcontext scaffold "Server=localhost\SQLEXPRESS;Database=Store;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer
 ```
+
+
+---
+
+## Ejecucion de Arquitectura
+
+### Temas Puntuales
+
+- Creacion de Proyecto en Base a una Arquitectura
+
+- Inyeccion de Dependencias
+
+- Uso de Inyeccion de Dependencias
+
+- Inyeccion del Contexto de EntityFramework
+
+- Muestreo y Agregacion de Informacion
+
