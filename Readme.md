@@ -211,8 +211,16 @@ dotnet ef dbcontext scaffold "Server=localhost\SQLEXPRESS;Database=Store;Trusted
 - Creacion de Proyecto en Base a una Arquitectura
 
 - Inyeccion de Dependencias
+    - Service Provider
+    - Patron Inyeccion de Dependencias
+    - Resolucion Centralizacion en la creacion de objetos
+    - Gestion de dependencias basado en su uso
 
 - Uso de Inyeccion de Dependencias
+    - Instalacion en el proyecto de Consola en:
+    ```
+    ConsoleApp -> Dependencias -> Administrar paquetes NuGet -> "microsoft.extensions.dependency" 
+    ```
 
 - Inyeccion del Contexto de EntityFramework
 
