@@ -226,3 +226,8 @@ dotnet ef dbcontext scaffold "Server=localhost\SQLEXPRESS;Database=Store;Trusted
 
 - Muestreo y Agregacion de Informacion
 
+- Agregados archivos de configuracion mediante NuGet
+```sh
+    - Microsoft.Extensions.Configuration
+    - Microsoft.Extensions.Configuration.Json
+```
