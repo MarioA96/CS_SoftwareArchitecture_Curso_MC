@@ -1,8 +1,19 @@
 Fullstack/.vs
+
 Fullstack/Domain/obj
+Fullstack/Domain/bin
+
 Fullstack/Aplication/obj
+Fullstack/Aplication/bin
+
 Fullstack/Data
+Fullstack/Data/bin
+
 Fullstack/Repository/obj
+Fullstack/Repository/bin
+
 FullStack/Aplication/obj
+FullStack/Aplication/bin
 
 FullStack/ConsoleApp/obj
+FullStack/ConsoleApp/bin
