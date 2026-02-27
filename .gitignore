@@ -20,3 +20,8 @@ FullStack/ConsoleApp/bin
 
 FullStack/Backend/bin
 FullStack/Backend/obj
+
+FullStack/Frontend/bin
+FullStack/Frontend/obj
+
+FullStack/Frontend/wwwroot/lib
