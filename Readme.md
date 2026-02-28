@@ -231,3 +231,48 @@ dotnet ef dbcontext scaffold "Server=localhost\SQLEXPRESS;Database=Store;Trusted
     - Microsoft.Extensions.Configuration
     - Microsoft.Extensions.Configuration.Json
 ```
+---
+
+## Backend con Minimal API
+
+### Temas Puntuales
+
+- Creacion de Proyecto Backend con Minimal API
+    - Se quita la opcion de Controladores y Vistas
+    - Program.cs -> Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+    - Backend.http -> Archivo para pruebas con REST Client
+   
+- Inyeccion de Dependencias en ASP.NET Core
+
+- Endpoint para Obtener Informacion
+
+- Endpoint para Crear Informacion
+
+- Endpoint para Editar Informacion
+
+- Endpoint para Eliminar Informacion
+
+- Pruebas de los Endpoints con Postman y Backend.http
+
+- Documentacion de la API con Swagger
+
+---
+
+## Frontend con Blazor WebAssembly
+
+### Temas Puntuales
+
+- Creacion de Proyecto Frontend con Blazor WebAssembly
+    - Se selecciona la opcion de ASP.NET Core Hosted
+    - Estructura del proyecto:
+        - Client: Proyecto Blazor WebAssembly
+        - Server: Proyecto ASP.NET Core para el backend
+        - Shared o Hybrid: Proyecto para compartir modelos entre Client y Server, ejemplo MAUI
+
+- Ventajas de Blazor WebAssembly
+    - Desarrollo en C# tanto para frontend como backend
+    - Reutilizacion de codigo y modelos entre Client y Server
+    - Integracion sencilla con ASP.NET Core
+    - Poder usar un solo Stack Tecnologico
+    - Puede trabajar offline (PWA)
+
