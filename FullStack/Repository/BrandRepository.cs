@@ -44,8 +44,20 @@ namespace Repository
 
         public async Task UpdateAsync(BrandEntity brandEntity)
         {
-            var brand = MapToModel(brandEntity);
-            _context.Entry(brand).State = EntityState.Modified;
+            if(brandEntity.Id is null)
+            {
+                throw new ArgumentException("El Id de la marca no puede ser nulo", nameof(BrandEntity));
+            }
+
+            var brand = await _context.Brands.FindAsync(brandEntity.Id);
+
+            if (brand == null)
+            {
+                throw new KeyNotFoundException($"La marca con Id={brandEntity.Id} no existe");
+            }
+
+            brand.Name = brandEntity.Name;
+
             await _context.SaveChangesAsync();
         }
 
