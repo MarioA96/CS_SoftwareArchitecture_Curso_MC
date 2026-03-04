@@ -276,3 +276,44 @@ dotnet ef dbcontext scaffold "Server=localhost\SQLEXPRESS;Database=Store;Trusted
     - Poder usar un solo Stack Tecnologico
     - Puede trabajar offline (PWA)
 
+- Agregacion de una "interfaz"/ esqueleto de una peticion
+    - En la raiz del proyecto de frontend se crea la carpeta OpenApi
+    - Dentro de la carpeta se agrega el archivo swagger.json
+    - Dentro de este depositamos el resultado del json que swagger nos da (https://localhost:7265/swagger/v1/swagger.json)
+- Instalacion de Nswag.ConsoleCore
+```shell
+PM (Consola del Administador de paquetes) > dotnet tool install --global Nswag.ConsoleCore
+```
+- Agregar en la raiz de frontend un archivo json, nswag.json
+```json
+{
+    "runtime": "Net100",
+    "documentGenerator": {
+        "fromDocument": {
+            "url": null,
+            "json": "OpenApi/swagger.json"
+        }
+    },
+    "codeGenerators": {
+        "openApiToCSharpClient": {
+            "className": "ApiClient",
+            "namespace": "Frontend.Client",
+            "generateClientInterfaces": true,
+            "useBaseUrl": false,
+            "generateBaseUrlProperty": false,
+            "injectHttpClient": true,
+            "disposeHttpClient": false,
+            "generateOptionalParameters": true,
+            "output": "ApiClient.cs"
+        }
+    }
+}
+```
+- Posteriormente escribimos en la terminal de PM (Consola del Administador de paquetes)
+```shell
+PM> cd Frontend
+PM> nswag run nswag.json
+```
+- Luego instalamos en Frontend > Dependencies > clic derecho Instalador de paquetes NuGet
+- Buscamos e instalamos NewtonJson
+- Buscamos e instalamos Microsoft.Extensions.Http
