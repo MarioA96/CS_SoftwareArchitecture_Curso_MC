@@ -18,7 +18,7 @@ Content-Type: application/json
 
 ###
 
-PUT {{Backend_HostAddress}}/brand/7
+PUT {{Backend_HostAddress}}/brand/5
 Content-Type: application/json
 
 {
