@@ -48,14 +48,17 @@ app.MapPost("brand", async (IUseCase<BrandEntity> useCase, BrandEntity brand) =>
 {
     await useCase.AddAsync(brand);
     return Results.Created();
-}).WithName("addbrand");
+})
+    .Produces(StatusCodes.Status201Created)
+    .WithName("addbrand");
 
-app.MapPut("brand/{id}", async (int id, JsonDocument body, IUseCase<BrandEntity> useCase) =>
+// app.MapPut("brand/{id}", async (int id, JsonDocument body, IUseCase<BrandEntity> useCase) =>
+app.MapPut("brand/{id}", async (int id, BrandEntity brand, IUseCase<BrandEntity> useCase) =>
 {
     try
     {
-        var name = body.RootElement.GetProperty("name").GetString();
-        var brandEntity = new BrandEntity(id, name!);
+        // var name = body.RootElement.GetProperty("name").GetString();
+        var brandEntity = new BrandEntity(id, brand.Name);
 
         await useCase.UpdateAsync(brandEntity);
     }
@@ -66,7 +69,9 @@ app.MapPut("brand/{id}", async (int id, JsonDocument body, IUseCase<BrandEntity>
 
     return Results.NoContent();
 
-}).WithName("updatebrand");
+})
+    .Produces(StatusCodes.Status204NoContent)
+    .WithName("updatebrand");
 
 app.MapDelete("brand/{id}", async (int id, IUseCase<BrandEntity> useCase) =>
 {
@@ -82,7 +87,9 @@ app.MapDelete("brand/{id}", async (int id, IUseCase<BrandEntity> useCase) =>
 
     return Results.NoContent();
 
-}).WithName("deletebrand");
+})
+    .Produces(StatusCodes.Status204NoContent)
+    .WithName("deletebrand");
 
 app.MapGet("/test", () =>
 {
