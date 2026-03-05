@@ -317,3 +317,41 @@ PM> nswag run nswag.json
 - Luego instalamos en Frontend > Dependencies > clic derecho Instalador de paquetes NuGet
 - Buscamos e instalamos NewtonJson
 - Buscamos e instalamos Microsoft.Extensions.Http
+
+- Ejecucion del backend fuera de Visual Studio
+- En el proyecto Backend > Properties > launchSettings.json
+- Editamos para que luzca algo como:
+```json
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+
+    "https": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "https://localhost:7265;http://localhost:5286",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+
+    "http": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "applicationUrl": "http://localhost:5286",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+
+  }
+}
+```
+- Ahora en una terminal nos vamos a la ruta del proyecto Backend, como:
+- ...\FullStack\Backend
+- Ejecutamos el comando
+```shell
+$> dotnet watch run
+```
