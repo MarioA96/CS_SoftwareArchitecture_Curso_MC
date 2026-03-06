@@ -60,8 +60,16 @@ app.MapGet("brand", async (IUseCase<BrandEntity> useCase) =>
 
 app.MapPost("brand", async (IUseCase<BrandEntity> useCase, BrandEntity brand) =>
 {
-    await useCase.AddAsync(brand);
-    return Results.Created();
+    try
+    {
+        await useCase.AddAsync(brand);
+        return Results.Created();
+    }
+    catch(Exception ex)
+    {
+        return Results.BadRequest(ex.Message);
+    }
+    
 })
     .Produces(StatusCodes.Status201Created)
     .WithName("addbrand");
