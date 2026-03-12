@@ -1,5 +1,8 @@
 using Aplication.Abstractions;
 using Aplication.Brand.UseCases;
+using Aplication.Product.DTOs;
+using Aplication.Product.Mappers;
+using Aplication.Product.UseCases;
 using Data;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +24,9 @@ builder.Services.AddDbContext<StoreContext>((options) =>
 
 builder.Services.AddTransient<IRepository<BrandEntity>, BrandRepository>();
 builder.Services.AddTransient<IUseCase<BrandEntity>, BrandUseCase>();
+builder.Services.AddTransient<IReadRepository<ProductEntity>, ProductRepository>();
+builder.Services.AddTransient<IReadUseCase<ProductDto, ProductEntity>, ProductUseCase>();
+builder.Services.AddTransient<IMapper<ProductEntity, ProductDto>, ProductEntityToDtoMapper>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -112,6 +118,12 @@ app.MapDelete("brand/{id}", async (int id, IUseCase<BrandEntity> useCase) =>
 })
     .Produces(StatusCodes.Status204NoContent)
     .WithName("deletebrand");
+
+// producto
+app.MapGet("/product", async (IReadUseCase<ProductDto, ProductEntity> useCase) =>
+{
+    return await useCase.GetAllAsync();
+});
 
 app.MapGet("/test", () =>
 {
