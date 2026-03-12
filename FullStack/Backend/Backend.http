@@ -28,3 +28,7 @@ Content-Type: application/json
 ###
 
 DELETE {{Backend_HostAddress}}/brand/7
+
+###
+
+GET {{Backend_HostAddress}}/product/
