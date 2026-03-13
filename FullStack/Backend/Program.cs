@@ -125,6 +125,24 @@ app.MapGet("/product", async (IReadUseCase<ProductDto, ProductEntity> useCase) =
     return await useCase.GetAllAsync();
 });
 
+app.MapGet("/product/{id}", async(int id, IReadUseCase<ProductDto, ProductEntity> useCase) =>
+{
+    try
+    {
+        var product = await useCase.GetByIdAsync(id);
+        if (product == null)
+            return Results.NotFound();
+
+        return Results.Ok(product);
+    }
+    catch(Exception ex)
+    {
+        return Results.NotFound(ex.Message);
+    }
+}).Produces<ProductDto>(StatusCodes.Status200OK)
+  .Produces(StatusCodes.Status404NotFound)
+  .WithName("getproductbyid");
+
 app.MapGet("/test", () =>
 {
     return "online";
