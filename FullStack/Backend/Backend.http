@@ -32,3 +32,7 @@ DELETE {{Backend_HostAddress}}/brand/7
 ###
 
 GET {{Backend_HostAddress}}/product/
+
+###
+
+GET {{Backend_HostAddress}}/product/3
