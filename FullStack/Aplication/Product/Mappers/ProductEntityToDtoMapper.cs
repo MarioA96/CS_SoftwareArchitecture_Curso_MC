@@ -22,6 +22,7 @@ namespace Aplication.Product.Mappers
                 Cost = productEntity.Cost,
                 Price = productEntity.Price,
                 Active = productEntity.Active,
+                BrandId = productEntity.BrandId
             };
         }
     }
