@@ -13,5 +13,6 @@ namespace Aplication.Product.DTOs
         public decimal Cost { get; set; }
         public decimal Price { get; set; }
         public bool Active { get; set; }
+        public int? BrandId { get; set; }
     }
 }
