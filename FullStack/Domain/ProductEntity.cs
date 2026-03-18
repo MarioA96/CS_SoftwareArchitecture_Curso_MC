@@ -13,6 +13,7 @@ namespace Domain
         private decimal _cost;
         private decimal _price;
         private bool _active;
+        private int? _brandId;
 
         #region properties
         public int? Id
@@ -72,23 +73,36 @@ namespace Domain
             get => _active;
             set => _active = value;
         }
+
+        public int? BrandId
+        {
+            get => _brandId;
+            set 
+            {
+                if (value <= 0)
+                    throw new ArgumentException("Id de Marca debe ser mayor que 0.", nameof(value));
+                _brandId = value;
+            }
+        }
         #endregion
 
-        public ProductEntity(int id, string name, decimal cost, decimal price, bool active)
+        public ProductEntity(int id, string name, decimal cost, decimal price, bool active, int? brandId)
         {
             Id = id;
             Name = name;
             Cost = cost;
             Price = price;
             Active = active;
+            BrandId = brandId;
         }
 
-        public ProductEntity(string name, decimal cost, decimal price, bool active)
+        public ProductEntity(string name, decimal cost, decimal price, bool active, int? brandId)
         {
             Name = name;
             Cost = cost;
             Price = price;
             Active = active;
+            BrandId = brandId;
         }
     }
 }
