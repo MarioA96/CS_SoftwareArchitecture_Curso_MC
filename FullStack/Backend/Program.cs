@@ -23,10 +23,19 @@ builder.Services.AddDbContext<StoreContext>((options) =>
 });
 
 builder.Services.AddTransient<IRepository<BrandEntity>, BrandRepository>();
-builder.Services.AddTransient<IUseCase<BrandEntity>, BrandUseCase>();
 builder.Services.AddTransient<IReadRepository<ProductEntity>, ProductRepository>();
+builder.Services.AddTransient<ICreateRepository<ProductEntity>, ProductRepository>();
+builder.Services.AddTransient<IUpdateRepository<ProductEntity>, ProductRepository>();
+builder.Services.AddTransient<IDeleteRepository, ProductRepository>();
+
+builder.Services.AddTransient<IUseCase<BrandEntity>, BrandUseCase>();
 builder.Services.AddTransient<IReadUseCase<ProductDto, ProductEntity>, ProductUseCase>();
+builder.Services.AddTransient<ICreateUseCase<ProductDto, ProductEntity>, CreateProductUseCase>();
+builder.Services.AddTransient<IUpdateUseCase<ProductDto, ProductEntity>, UpdateProductUseCase>();
+builder.Services.AddTransient<IDeleteUseCase, DeleteProuctUseCase>();
+
 builder.Services.AddTransient<IMapper<ProductEntity, ProductDto>, ProductEntityToDtoMapper>();
+builder.Services.AddTransient<IMapper<ProductDto, ProductEntity>, ProductDtoToEntityMapper>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -142,6 +151,53 @@ app.MapGet("/product/{id}", async(int id, IReadUseCase<ProductDto, ProductEntity
 }).Produces<ProductDto>(StatusCodes.Status200OK)
   .Produces(StatusCodes.Status404NotFound)
   .WithName("getproductbyid");
+
+app.MapPost("/product",
+    async (ProductDto productDto, ICreateUseCase<ProductDto, ProductEntity> useCase) =>
+{
+    try
+    {
+        System.Console.WriteLine("Enter");
+        await useCase.AddAsync(productDto);
+        return Results.Created();
+    }
+    catch (ArgumentException argEx)
+    {
+        return Results.BadRequest(argEx.Message);
+    }
+    catch (Exception ex)
+    {
+        return Results.InternalServerError(ex.Message);
+    }
+}).Produces(StatusCodes.Status201Created)
+  .Produces(StatusCodes.Status400BadRequest)
+  .Produces(StatusCodes.Status500InternalServerError)
+  .WithName("addproduct");
+
+app.MapPut("/product/{id}", async (int id, ProductDto productDto, IUpdateUseCase<ProductDto, ProductEntity> useCase) =>
+{
+    try
+    {
+        await useCase.UpdateAsync(productDto, id);
+        return Results.NoContent();
+    }
+    catch (ArgumentException argEx)
+    {
+        return Results.BadRequest(argEx.Message);
+    }
+    catch (KeyNotFoundException notFoundEx)
+    {
+        return Results.NotFound(notFoundEx.Message);
+    }
+    catch (Exception ex)
+    {
+        return Results.InternalServerError(ex.Message);
+    }
+}).Produces(StatusCodes.Status204NoContent)
+    .Produces(StatusCodes.Status400BadRequest)
+    .Produces(StatusCodes.Status404NotFound)
+    .Produces(StatusCodes.Status500InternalServerError)
+    .WithName("updateproduct");
 
 app.MapGet("/test", () =>
 {
