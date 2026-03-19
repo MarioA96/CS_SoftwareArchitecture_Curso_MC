@@ -43,6 +43,7 @@ namespace Repository
         {
             var product = MapToModel(productEntity);
             product.Date = DateTime.Now;
+            await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
         }
 
