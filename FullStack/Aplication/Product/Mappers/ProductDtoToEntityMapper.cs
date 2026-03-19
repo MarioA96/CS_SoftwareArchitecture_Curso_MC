@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Aplication.Product.Mappers
 {
-    public interface ProductDtoToEntityMapper : IMapper<ProductDto, ProductEntity>
+    public class ProductDtoToEntityMapper : IMapper<ProductDto, ProductEntity>
     {
         public ProductEntity Map(ProductDto productDto)
         {
-            return productDto.Id == null
-                ? new ProductEntity(productDto.Name, productDto.Cost, productDto.Price, productDto.Active, productDto.BrandId)
+            return productDto.Id == null ? 
+                new ProductEntity(productDto.Name, productDto.Cost, productDto.Price, productDto.Active, productDto.BrandId)
                 : new ProductEntity((int)productDto.Id, productDto.Name, productDto.Cost, productDto.Price, productDto.Active, productDto.BrandId);
         }
     }
