@@ -63,3 +63,7 @@ Content-Type: application/json
     "active": true,
     "brandId": 2
 }
+
+###
+
+DELETE {{Backend_HostAddress}}/product/8

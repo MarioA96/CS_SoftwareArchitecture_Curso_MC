@@ -199,6 +199,26 @@ app.MapPut("/product/{id}", async (int id, ProductDto productDto, IUpdateUseCase
     .Produces(StatusCodes.Status500InternalServerError)
     .WithName("updateproduct");
 
+app.MapDelete("/product/{id}", async (int id, IDeleteUseCase useCase) =>
+{
+    try
+    {
+        await useCase.DeleteAsync(id);
+        return Results.NoContent();
+    }
+    catch (KeyNotFoundException notFoundEx)
+    {
+        return Results.NotFound(notFoundEx.Message);
+    }
+    catch (Exception ex)
+    {
+        return Results.InternalServerError(ex.Message);
+    }
+}).Produces(StatusCodes.Status204NoContent)
+    .Produces(StatusCodes.Status404NotFound)
+    .Produces(StatusCodes.Status500InternalServerError)
+    .WithName("deleteproduct");
+
 app.MapGet("/test", () =>
 {
     return "online";
