@@ -12,6 +12,15 @@
 }
 else
 {
+    @if (error is not null)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+
+    <button class="btn btn-primary" @onclick='() => Nav.NavigateTo("/products/frmproduct")'>Crear Producto</button>
+
+    <hr />
+
     <table class="table">
         <thead>
             <tr>
