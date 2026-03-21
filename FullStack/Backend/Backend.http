@@ -66,4 +66,4 @@ Content-Type: application/json
 
 ###
 
-DELETE {{Backend_HostAddress}}/product/8
+DELETE {{Backend_HostAddress}}/product/12
