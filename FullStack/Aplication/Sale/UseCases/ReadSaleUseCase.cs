@@ -11,7 +11,7 @@ namespace Aplication.Sale.UseCases
 {
     public class ReadSaleUseCase : IReadUseCase<SaleDto, SaleEntity>
     {
-        private readonly IReadRepository<SaleEntity, SaleDto> _repository;
+        private readonly IReadRepository<SaleEntity> _repository;
         private readonly IMapper<SaleEntity, SaleDto> _mapper;
 
         public ReadSaleUseCase(IReadRepository<SaleEntity> repository, IMapper<SaleEntity, SaleDto> mapper)
