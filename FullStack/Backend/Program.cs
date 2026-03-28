@@ -3,6 +3,10 @@ using Aplication.Brand.UseCases;
 using Aplication.Product.DTOs;
 using Aplication.Product.Mappers;
 using Aplication.Product.UseCases;
+using Aplication.Sale.DTOs;
+using Aplication.Sale.Mappers;
+using Aplication.Sale.UseCases;
+using Backend;
 using Data;
 using Domain;
 using Microsoft.EntityFrameworkCore;
@@ -27,15 +31,21 @@ builder.Services.AddTransient<IReadRepository<ProductEntity>, ProductRepository>
 builder.Services.AddTransient<ICreateRepository<ProductEntity>, ProductRepository>();
 builder.Services.AddTransient<IUpdateRepository<ProductEntity>, ProductRepository>();
 builder.Services.AddTransient<IDeleteRepository, ProductRepository>();
+builder.Services.AddTransient<ICreateRepository<SaleEntity>, CreateSaleRepository>();
+builder.Services.AddTransient<IReadRepository<SaleEntity>, ReadSaleRepository>();
 
 builder.Services.AddTransient<IUseCase<BrandEntity>, BrandUseCase>();
 builder.Services.AddTransient<IReadUseCase<ProductDto, ProductEntity>, ProductUseCase>();
 builder.Services.AddTransient<ICreateUseCase<ProductDto, ProductEntity>, CreateProductUseCase>();
 builder.Services.AddTransient<IUpdateUseCase<ProductDto, ProductEntity>, UpdateProductUseCase>();
 builder.Services.AddTransient<IDeleteUseCase, DeleteProuctUseCase>();
+builder.Services.AddTransient<IReadUseCase<SaleDto, SaleEntity>, ReadSaleUseCase>();
+builder.Services.AddTransient<ICreateUseCase<SaleDto, SaleEntity>, CreateSaleUseCase>();
 
 builder.Services.AddTransient<IMapper<ProductEntity, ProductDto>, ProductEntityToDtoMapper>();
 builder.Services.AddTransient<IMapper<ProductDto, ProductEntity>, ProductDtoToEntityMapper>();
+builder.Services.AddTransient<IMapper<SaleEntity, SaleDto>, SaleEntityToDtoMapper>();
+builder.Services.AddTransient<IMapper<SaleDto, SaleEntity>, SaleDtoToEntityMapper>();
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -66,6 +76,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors(FrontendPolicy);
+
+// endpoints de sale
+app.MapSaleEndpoints();
 
 app.MapGet("brand", async (IUseCase<BrandEntity> useCase) =>
 {
@@ -224,4 +237,17 @@ app.MapGet("/test", () =>
     return "online";
 }).WithName("test");
 
+/*
+var name = "Mario";
+name.Hi();
+*/
+
 app.Run();
+
+/*
+public static class StringExtensions
+{
+    public static void Hi(this String str)
+        => Console.WriteLine("Hola " + str);
+}
+*/
