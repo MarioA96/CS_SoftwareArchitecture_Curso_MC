@@ -67,3 +67,32 @@ Content-Type: application/json
 ###
 
 DELETE {{Backend_HostAddress}}/product/12
+
+###
+
+POST {{Backend_HostAddress}}/sales
+Content-Type: application/json
+
+{
+    "date": "2025-09-21T21:46:27",
+    "details": [
+        {
+            "productId": 3,
+            "unitPrice": 12,
+            "quantity": 4
+        },
+        {
+            "productId": 4,
+            "unitPrice": 15,
+            "quantity": 10
+        }
+    ]
+}
+
+###
+
+GET {{Backend_HostAddress}}/sales
+
+###
+
+GET {{Backend_HostAddress}}/sales/1
