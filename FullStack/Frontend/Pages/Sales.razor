@@ -1,0 +1,71 @@
+﻿@page "/sales"
+@using Frontend.Client
+@inject ApiClient Api
+@inject NavigationManager Nav
+
+<h3>Sales</h3>
+
+@if (isLoading)
+{
+    <p>Cargando...</p>
+} 
+else
+{
+    if(error is not null)
+    {
+        <div class="alert alert-danger">@error</div>
+    }
+
+    <button class="btn btn-primary mb-3" @onclick='()=>Nav.NavigateTo("/sales/frmsale")'>Crear Venta</button>
+
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in sales)
+            {
+                <tr>
+                    <td>@s.Id</td>
+                    <td>@s.Date</td>
+                    <td>@s.Total.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<SaleDto> sales = null;
+    private bool isLoading;
+    private string? error = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAsync();
+    }
+
+    private async Task LoadAsync()
+    {
+        try
+        {
+            isLoading = true;
+            error = null;
+            sales = await Api.GetsalesAsync();
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+}
