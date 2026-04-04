@@ -1,0 +1,67 @@
+﻿@page "/mycomponent";
+@inject HttpClient Http;
+@inject IJSRuntime JS;
+
+@implements IAsyncDisposable;
+
+
+<h3>Mi Componente</h3>
+
+<p>Hola @name</p>
+
+<p>Count: @count</p>
+<button class="btn btn-primary" @onclick="Increase">
+    Incrementar
+</button>
+
+<HiComponent Name="@name" Info="@some"></HiComponent>
+
+<input type="text" @bind="some" @bind:event="oninput"/>
+<p>El valor de some es: @some</p>
+
+<div>
+    @if(data == null)
+    {
+        <p>Cargando...</p>
+    } else
+    {
+        <pre>@data</pre>
+    }
+</div>
+
+@code {
+    private string name = "Mario"; // Interpolacion
+
+    private int count = 0; // Binding unidireccional
+
+    private string some = "Algo";
+
+    private string? data;
+
+    private void Increase()
+    {
+        count++;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(2000);
+        data = await Http.GetStringAsync("sample-data/people.json");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("console.log","Primera vez que se carga el sitio");
+        }
+
+        await JS.InvokeVoidAsync("console.log", "Se ha modificado el estado del componente");
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        await Task.Delay(1000);
+        Console.WriteLine("Dispose: componente destruido");
+    }
+}
