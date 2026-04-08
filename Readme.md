@@ -355,3 +355,40 @@ PM> nswag run nswag.json
 ```shell
 $> dotnet watch run
 ```
+
+---
+
+## Mappers y DTOs
+
+### Creacion de Interfaces
+
+### Segregacion de Interfaces
+
+### Que es y para que sirve un Mapper?
+
+### Caso de Uso con DTO y Mapper
+
+---
+
+## Validaciones en el Frontend
+
+### Instalacion de paquetes necesarios
+
+- FluentValidation y Blazila
+```shell
+> Frontend -> Dependencies -> clic derecho -> Administrar paquetes NuGet 
+                    -> FluentValidation & FluentValidation.DependencyInjectionExtensions & Blazila
+```
+
+---
+
+
+## Modulo Maestro-Detalle
+
+### Que es un Modulo Maestro-Detalle?
+
+### Creacion de Entity Detalle
+
+### Creacion de Entity Maestro
+
+### C# Metodos de extension
